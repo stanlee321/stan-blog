@@ -1,0 +1,2251 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Jurados Electorales de PDF a CSV | fastpages</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Jurados Electorales de PDF a CSV" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Un tutorial de como comvertir PDF a CSV" />
+<meta property="og:description" content="Un tutorial de como comvertir PDF a CSV" />
+<link rel="canonical" href="https://stanlee321.github.io/stan-blog/jupyter/2020/02/20/extract-jurados.html" />
+<meta property="og:url" content="https://stanlee321.github.io/stan-blog/jupyter/2020/02/20/extract-jurados.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-02-20T00:00:00-06:00" />
+<script type="application/ld+json">
+{"description":"Un tutorial de como comvertir PDF a CSV","url":"https://stanlee321.github.io/stan-blog/jupyter/2020/02/20/extract-jurados.html","@type":"BlogPosting","headline":"Jurados Electorales de PDF a CSV","dateModified":"2020-02-20T00:00:00-06:00","datePublished":"2020-02-20T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://stanlee321.github.io/stan-blog/jupyter/2020/02/20/extract-jurados.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/stan-blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://stanlee321.github.io/stan-blog/feed.xml" title="fastpages" /><link rel="shortcut icon" type="image/x-icon" href="/stan-blog/images/favicon.ico"><link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/stan-blog/">fastpages</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/stan-blog/about/">About Me</a><a class="page-link" href="/stan-blog/search/">Search</a><a class="page-link" href="/stan-blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Jurados Electorales de  PDF a CSV</h1><p class="page-description">Un tutorial de como comvertir PDF a CSV</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-02-20T00:00:00-06:00" itemprop="datePublished">
+        Feb 20, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      12 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/stan-blog/categories/#jupyter">jupyter</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/stanlee321/stan-blog/tree/master/_notebooks/2020-02-20-extract-jurados.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/stan-blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/stanlee321/stan-blog/master?filepath=_notebooks%2F2020-02-20-extract-jurados.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/stan-blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/stanlee321/stan-blog/blob/master/_notebooks/2020-02-20-extract-jurados.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/stan-blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Parser-de-PDF-a-CSV-de-los-jurados-electorales.">Parser de PDF a CSV de los jurados electorales. </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Setup">Setup </a></li>
+<li class="toc-entry toc-h2"><a href="#Some-imports">Some imports </a></li>
+<li class="toc-entry toc-h2"><a href="#Read-PDF-file">Read PDF file </a></li>
+<li class="toc-entry toc-h2"><a href="#Processing">Processing </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#REGEX">REGEX </a></li>
+<li class="toc-entry toc-h3"><a href="#Limpiar-los-valores-nan-de-los-nombres-de-las-columnas">Limpiar los valores nan de los nombres de las columnas </a></li>
+<li class="toc-entry toc-h3"><a href="#Reemplazar-los-valores-de-Mesa-por-los-extraidos">Reemplazar los valores de Mesa por los extraidos </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Crear-el-pipeline-para-todos-las-páginas.">Crear el pipeline para todos las páginas. </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Crear-funciones-auxiliares">Crear funciones auxiliares </a></li>
+<li class="toc-entry toc-h3"><a href="#Crear-funcion-para-el-pipeline">Crear funcion para el pipeline </a></li>
+<li class="toc-entry toc-h3"><a href="#Concatenate-Dataframe">Concatenate Dataframe </a></li>
+<li class="toc-entry toc-h3"><a href="#Save-to-CSV">Save to CSV </a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-02-20-extract-jurados.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Parser-de-PDF-a-CSV-de-los-jurados-electorales.">
+<a class="anchor" href="#Parser-de-PDF-a-CSV-de-los-jurados-electorales." aria-hidden="true"><span class="octicon octicon-link"></span></a>Parser de PDF a CSV de los jurados electorales.<a class="anchor-link" href="#Parser-de-PDF-a-CSV-de-los-jurados-electorales."> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>El objetivo de este notebook es obtener un CSV que pueda luego ser analizado y explorado.
+Este notebook muestra los pasos necesarios para parsear el archivo <code>jurados.pdf</code> a CSV.</p>
+<p>Se tubo un problema a la hora de extraer con <code>regular expressions</code> los Doc. de Identidad con valores
+alfanumericos. Se deja como trabajo restanto, limpiar la columna respectiva y adyasentes a estos valores.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Setup">
+<a class="anchor" href="#Setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup<a class="anchor-link" href="#Setup"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Se siguen los ejemplos de <a href="https://nbviewer.jupyter.org/github/chezou/tabula-py/blob/master/examples/tabula_example.ipynb">https://nbviewer.jupyter.org/github/chezou/tabula-py/blob/master/examples/tabula_example.ipynb</a></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pip</span> install tabula-py
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Collecting tabula-py
+  Downloading tabula_py-2.2.0-py3-none-any.whl (11.7 MB)
+     |████████████████████████████████| 11.7 MB 1.1 MB/s eta 0:00:01    |██████████████████▊             | 6.8 MB 1.9 MB/s eta 0:00:03     |███████████████████             | 6.9 MB 1.9 MB/s eta 0:00:03     |███████████████████▎            | 7.0 MB 1.9 MB/s eta 0:00:03
+Requirement already satisfied: pandas&gt;=0.25.3 in /home/stanlee321/anaconda3/envs/scraping_p37/lib/python3.7/site-packages (from tabula-py) (1.0.5)
+Requirement already satisfied: numpy in /home/stanlee321/anaconda3/envs/scraping_p37/lib/python3.7/site-packages (from tabula-py) (1.19.1)
+Collecting distro
+  Downloading distro-1.5.0-py2.py3-none-any.whl (18 kB)
+Requirement already satisfied: python-dateutil&gt;=2.6.1 in /home/stanlee321/anaconda3/envs/scraping_p37/lib/python3.7/site-packages (from pandas&gt;=0.25.3-&gt;tabula-py) (2.8.1)
+Requirement already satisfied: pytz&gt;=2017.2 in /home/stanlee321/anaconda3/envs/scraping_p37/lib/python3.7/site-packages (from pandas&gt;=0.25.3-&gt;tabula-py) (2020.1)
+Requirement already satisfied: six&gt;=1.5 in /home/stanlee321/anaconda3/envs/scraping_p37/lib/python3.7/site-packages (from python-dateutil&gt;=2.6.1-&gt;pandas&gt;=0.25.3-&gt;tabula-py) (1.15.0)
+Installing collected packages: distro, tabula-py
+Successfully installed distro-1.5.0 tabula-py-2.2.0
+Note: you may need to restart the kernel to use updated packages.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Some-imports">
+<a class="anchor" href="#Some-imports" aria-hidden="true"><span class="octicon octicon-link"></span></a>Some imports<a class="anchor-link" href="#Some-imports"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">tabula</span> <span class="kn">import</span> <span class="n">read_pdf</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Read-PDF-file">
+<a class="anchor" href="#Read-PDF-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Read PDF file<a class="anchor-link" href="#Read-PDF-file"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Se crea una lista de dataframes que contienen la informacion de cada pagina del pdf.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Read the pdf as a list of dataframes</span>
+<span class="n">dfs</span> <span class="o">=</span> <span class="n">read_pdf</span><span class="p">(</span><span class="s2">"jurados.pdf"</span><span class="p">,</span> <span class="n">pages</span><span class="o">=</span><span class="s2">"all"</span><span class="p">,</span> <span class="n">guess</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dfs</span><span class="p">))</span>
+<span class="n">dfs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3072
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>Unnamed: 1</th>
+      <th>ESTADO PLURINACIONAL DE BOLIVIA</th>
+      <th>Unnamed: 2</th>
+      <th>Unnamed: 3</th>
+      <th>Unnamed: 4</th>
+      <th>Unnamed: 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>ÓRGANO ELECTORAL PLURINACIONAL</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Tribunal Electoral Departamental de La Paz</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Elecciones Generales 2020</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>18 de Octubre de 2020</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>País:</td>
+      <td>Bolivia</td>
+      <td>LISTADO  DE JURADOS ELECTORALES</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>N°</td>
+      <td>Apellidos y Nombres</td>
+      <td>Doc. de Identidad Municipio</td>
+      <td>Recinto</td>
+      <td>NaN</td>
+      <td>Mesa</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1</td>
+      <td>ABALO LUQUE  JUDITH NANCY</td>
+      <td>I  9102281 El Alto</td>
+      <td>Col. Rotary Chuquiago Marca</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2</td>
+      <td>ABALOS CHOQUE  MANCY</td>
+      <td>I  4960747 El Alto</td>
+      <td>Unidad Educativa Juan Capriles</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>3</td>
+      <td>ABALOS QUISPE  MARUJA MERCEDES</td>
+      <td>I  4943746 El Alto</td>
+      <td>Col. Tunari</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>4</td>
+      <td>ABARIOJO YUCO  MARCO ANTONIO</td>
+      <td>I  1939274 Nuestra Señora de La Paz</td>
+      <td>Col. Cristo Rey</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Processing">
+<a class="anchor" href="#Processing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Processing<a class="anchor-link" href="#Processing"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Se crea una copia de la lista de dataframes para no volver a cargar el archivo pdf.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dfs_dev</span> <span class="o">=</span> <span class="n">dfs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Se procedio a probar diferentes paginas (su valor en la lista es su valor como pagina en el pdf). En este caso el 3041</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">dfs_dev</span><span class="p">[</span><span class="mi">3041</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">5</span><span class="p">:]</span>
+
+<span class="c1"># Rename columns</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Use as dataframe the ramaining data.</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>5</th>
+      <th>N°</th>
+      <th>Apellidos y Nombres</th>
+      <th>Doc. de Identidad Municipio</th>
+      <th>Recinto Mesa</th>
+      <th>NaN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>20</th>
+      <td>54.753</td>
+      <td>ZAVALA ESPINOZA  CLAUDIA ANTONIETA</td>
+      <td>I  4790366 Nuestra Señora de La Paz</td>
+      <td>Escuela Rosemari de Barrientos</td>
+      <td>46.0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>54.754</td>
+      <td>ZAVALA HUMEREZ  FEDERICO ERNESTO</td>
+      <td>I  4311981 Nuestra Señora de La Paz</td>
+      <td>Esc. San Martin</td>
+      <td>34.0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>54.755</td>
+      <td>ZAVALA JIMENEZ  MARIO ALBERTO</td>
+      <td>I  8312089 El Alto</td>
+      <td>Colegio Walter Alpire 2do Patio</td>
+      <td>14.0</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>54.756</td>
+      <td>ZAVALA JIMENEZ  PAOLA ANDREA</td>
+      <td>I  10920426 El Alto</td>
+      <td>Colegio Walter Alpire 1er Patio</td>
+      <td>28.0</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Fecha:</td>
+      <td>18/09/2020</td>
+      <td>NaN</td>
+      <td>Página: 3.042 de 3.072</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Se puede ver que hay valores de "fecha -- - - - - " al final del dataframe. Posteriormente se limpiara estos valores.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="s2">"Recinto Mesa"</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"Recinto Mesa"</span><span class="p">:</span> <span class="s2">"Recinto"</span> <span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>5</th>
+      <th>N°</th>
+      <th>Apellidos y Nombres</th>
+      <th>Doc. de Identidad Municipio</th>
+      <th>Recinto</th>
+      <th>NaN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>54.739</td>
+      <td>ZARSURI LUNA  LIMBER</td>
+      <td>I  7015364 Cairoma</td>
+      <td>U.E. Araca Torre Pampa</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>54.740</td>
+      <td>ZARSURI RIASA  JULIA</td>
+      <td>I  6805130 Inquisivi</td>
+      <td>Escuela Eliodoro Camacho</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>54.741</td>
+      <td>ZARSURI SALAZAR  CINTHYA STEPHANIE</td>
+      <td>I  6894259 Nuestra Señora de La Paz</td>
+      <td>Escuela Superior de Formación de Maestros Simo...</td>
+      <td>15.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>54.742</td>
+      <td>ZARSURI TARQUI  GABRIEL FRANZ</td>
+      <td>I  4376305 Ixiamas</td>
+      <td>Esc. German Busch</td>
+      <td>15.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>54.743</td>
+      <td>ZARSURI TINTAYA  EDITH</td>
+      <td>I  9090775 El Alto</td>
+      <td>U.E. Iberdrola</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Se procede a eliminar los N ultimos elementos de la tabla, el ultimo elemento que corresponde a la fecha se lo señala con un 1.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>5</th>
+      <th>N°</th>
+      <th>Apellidos y Nombres</th>
+      <th>Doc. de Identidad Municipio</th>
+      <th>Recinto Mesa</th>
+      <th>NaN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>19</th>
+      <td>54.374</td>
+      <td>ZAMBRANA FLORES  BORIS PABLO</td>
+      <td>I  2622984 Nuestra Señora de La Paz</td>
+      <td>Unidad Educativa Los Pinos</td>
+      <td>26.0</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>54.375</td>
+      <td>ZAMBRANA FLORES  LUIS MIGUEL</td>
+      <td>I  6827045 Nuestra Señora de La Paz</td>
+      <td>Esc. Jose Santos</td>
+      <td>21.0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>54.376</td>
+      <td>ZAMBRANA FUENTES  JOEL OMAR</td>
+      <td>I  9947828 Viacha</td>
+      <td>Esc. San Luis</td>
+      <td>22.0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>54.377</td>
+      <td>ZAMBRANA GALARZA QUISPE PRIMITIVA</td>
+      <td>I  6130700 El Alto</td>
+      <td>Colegio 6 de Junio</td>
+      <td>26.0</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>54.378</td>
+      <td>ZAMBRANA GARCIA  OSVALDO ENRIQUE</td>
+      <td>I  5501507 Nuestra Señora de La Paz</td>
+      <td>Escuela Pedro Poveda</td>
+      <td>17.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="REGEX">
+<a class="anchor" href="#REGEX" aria-hidden="true"><span class="octicon octicon-link"></span></a>REGEX<a class="anchor-link" href="#REGEX"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Se utiliza regular expresion para separar los valores de la columna "Doc. de Identidad Municipio".</p>
+<p>Es aqui donde se tubo problmeas para parsear los valores alfanumericos que podria tener un Documento de Identidad.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">"Doc. de Identidad Municipio"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\b(\d+)\b([^\w-])"</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>I</td>
+      <td>6824163</td>
+      <td></td>
+      <td>Achocalla</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>I</td>
+      <td>8461434</td>
+      <td></td>
+      <td>Nuestra Señora de La Paz</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>I</td>
+      <td>5497883</td>
+      <td></td>
+      <td>Nuestra Señora de La Paz</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>I</td>
+      <td>6936357</td>
+      <td></td>
+      <td>Apolo</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>I</td>
+      <td>7313138</td>
+      <td></td>
+      <td>El Alto</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>I</td>
+      <td>6794431</td>
+      <td></td>
+      <td>Nuestra Señora de La Paz</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>I</td>
+      <td>1883348</td>
+      <td></td>
+      <td>El Alto</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>I</td>
+      <td>4891939</td>
+      <td></td>
+      <td>Nuestra Señora de La Paz</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>I</td>
+      <td>13927008</td>
+      <td></td>
+      <td>El Alto</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>I</td>
+      <td>12670368</td>
+      <td></td>
+      <td>El Alto</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>I</td>
+      <td>4901684</td>
+      <td></td>
+      <td>Nuestra Señora de La Paz</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>I</td>
+      <td>8320777</td>
+      <td></td>
+      <td>Nuestra Señora de La Paz</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>I</td>
+      <td>6935873</td>
+      <td></td>
+      <td>Nuestra Señora de La Paz</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>I</td>
+      <td>2622984</td>
+      <td></td>
+      <td>Nuestra Señora de La Paz</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>I</td>
+      <td>6827045</td>
+      <td></td>
+      <td>Nuestra Señora de La Paz</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>I</td>
+      <td>9947828</td>
+      <td></td>
+      <td>Viacha</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>I</td>
+      <td>6130700</td>
+      <td></td>
+      <td>El Alto</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>I</td>
+      <td>5501507</td>
+      <td></td>
+      <td>Nuestra Señora de La Paz</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Se crean 4 columnas adicionales para alojar los valores que el REGEX encontro</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[[</span><span class="s2">"PREFIX - Doc. de Identidad"</span><span class="p">,</span> <span class="s2">"Doc. de Identidad"</span><span class="p">,</span> <span class="s2">"unnamed:0"</span><span class="p">,</span> <span class="s2">"Municipio"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Doc. de Identidad Municipio"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\b(\d+)\b([^\w-])"</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Revisar cuantos valores <code>nan</code> se tienen en los nombres de las columnas</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="n">c</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>9
+&lt;class 'str'&gt; N°
+&lt;class 'str'&gt; Apellidos y Nombres
+&lt;class 'str'&gt; Doc. de Identidad Municipio
+&lt;class 'str'&gt; Recinto Mesa
+&lt;class 'numpy.float64'&gt; nan
+&lt;class 'str'&gt; PREFIX - Doc. de Identidad
+&lt;class 'str'&gt; Doc. de Identidad
+&lt;class 'str'&gt; unnamed:0
+&lt;class 'str'&gt; Municipio
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Limpiar-los-valores-nan-de-los-nombres-de-las-columnas">
+<a class="anchor" href="#Limpiar-los-valores-nan-de-los-nombres-de-las-columnas" aria-hidden="true"><span class="octicon octicon-link"></span></a>Limpiar los valores nan de los nombres de las columnas<a class="anchor-link" href="#Limpiar-los-valores-nan-de-los-nombres-de-las-columnas"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Se renombrar los valores de los nombres de las columnas que tubieran valores <code>nan</code> con placeholders denominados <code>unnamed:X</code> donde X es un indice que se autoincrementa por el numero de valores <code>nan</code>  presentes en las columnas.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># List hte actual column names</span>
+<span class="n">df_names_to_fix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Create a new list with fixed column names</span>
+<span class="n">df_names_fixed</span> <span class="o">=</span> <span class="n">df_names_to_fix</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">'unnamed:'</span> <span class="o">+</span> <span class="p">(</span><span class="n">df_names_to_fix</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df_names_to_fix</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span><span class="o">.</span><span class="n">cumcount</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
+
+<span class="c1"># Set the new column names to the test dataframe</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span>  <span class="o">=</span> <span class="n">df_names_fixed</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>5</th>
+      <th>N°</th>
+      <th>Apellidos y Nombres</th>
+      <th>Doc. de Identidad Municipio</th>
+      <th>Recinto Mesa</th>
+      <th>unnamed:1</th>
+      <th>PREFIX - Doc. de Identidad</th>
+      <th>Doc. de Identidad</th>
+      <th>unnamed:0</th>
+      <th>Municipio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>54.361</td>
+      <td>ZAMBRANA CHEJO  INES AMPARO</td>
+      <td>I  6824163 Achocalla</td>
+      <td>U. E. Marquirivi</td>
+      <td>14.0</td>
+      <td>I</td>
+      <td>6824163</td>
+      <td></td>
+      <td>Achocalla</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>54.362</td>
+      <td>ZAMBRANA CHOQUE  JOSE ALFREDO</td>
+      <td>I  8461434 Nuestra Señora de La Paz</td>
+      <td>Escuela Superior de Formación de Maestros Simo...</td>
+      <td>15.0</td>
+      <td>I</td>
+      <td>8461434</td>
+      <td></td>
+      <td>Nuestra Señora de La Paz</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>54.363</td>
+      <td>ZAMBRANA  CLAUDIA PAMELA</td>
+      <td>I  5497883 Nuestra Señora de La Paz</td>
+      <td>Esc. Sagrado Corazon De Jesus</td>
+      <td>35.0</td>
+      <td>I</td>
+      <td>5497883</td>
+      <td></td>
+      <td>Nuestra Señora de La Paz</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>54.364</td>
+      <td>ZAMBRANA COLQUE  JHANETH CATALINA</td>
+      <td>I  6936357 Apolo</td>
+      <td>U. E. Machua</td>
+      <td>1.0</td>
+      <td>I</td>
+      <td>6936357</td>
+      <td></td>
+      <td>Apolo</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>54.365</td>
+      <td>ZAMBRANA COLQUE  VANIA</td>
+      <td>I  7313138 El Alto</td>
+      <td>Col. Santa Maria De Los Angeles</td>
+      <td>35.0</td>
+      <td>I</td>
+      <td>7313138</td>
+      <td></td>
+      <td>El Alto</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="n">c</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>5
+&lt;class 'str'&gt; N°
+&lt;class 'str'&gt; Apellidos y Nombres
+&lt;class 'str'&gt; Doc. de Identidad Municipio
+&lt;class 'str'&gt; Recinto
+&lt;class 'numpy.float64'&gt; nan
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">"unnamed:0"</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([' '], dtype=object)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Reemplazar-los-valores-de-Mesa-por-los-extraidos">
+<a class="anchor" href="#Reemplazar-los-valores-de-Mesa-por-los-extraidos" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reemplazar los valores de Mesa por los extraidos<a class="anchor-link" href="#Reemplazar-los-valores-de-Mesa-por-los-extraidos"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Como ya se tiene extraido el valor de mesa en una columna auxiliar , en este caso <code>"unnamed:1"</code>, se procede a coloar su valor en su columna respectiva.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">"Mesa"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"unnamed:1"</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Se quitan las columnas auxiliares.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Doc. de Identidad Municipio"</span><span class="p">,</span>  <span class="s2">"unnamed:0"</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>5</th>
+      <th>N°</th>
+      <th>Apellidos y Nombres</th>
+      <th>Recinto Mesa</th>
+      <th>unnamed:1</th>
+      <th>PREFIX - Doc. de Identidad</th>
+      <th>Doc. de Identidad</th>
+      <th>Municipio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>54.361</td>
+      <td>ZAMBRANA CHEJO  INES AMPARO</td>
+      <td>U. E. Marquirivi</td>
+      <td>14.0</td>
+      <td>I</td>
+      <td>6824163</td>
+      <td>Achocalla</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>54.362</td>
+      <td>ZAMBRANA CHOQUE  JOSE ALFREDO</td>
+      <td>Escuela Superior de Formación de Maestros Simo...</td>
+      <td>15.0</td>
+      <td>I</td>
+      <td>8461434</td>
+      <td>Nuestra Señora de La Paz</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>54.363</td>
+      <td>ZAMBRANA  CLAUDIA PAMELA</td>
+      <td>Esc. Sagrado Corazon De Jesus</td>
+      <td>35.0</td>
+      <td>I</td>
+      <td>5497883</td>
+      <td>Nuestra Señora de La Paz</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>54.364</td>
+      <td>ZAMBRANA COLQUE  JHANETH CATALINA</td>
+      <td>U. E. Machua</td>
+      <td>1.0</td>
+      <td>I</td>
+      <td>6936357</td>
+      <td>Apolo</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>54.365</td>
+      <td>ZAMBRANA COLQUE  VANIA</td>
+      <td>Col. Santa Maria De Los Angeles</td>
+      <td>35.0</td>
+      <td>I</td>
+      <td>7313138</td>
+      <td>El Alto</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Crear-el-pipeline-para-todos-las-páginas.">
+<a class="anchor" href="#Crear-el-pipeline-para-todos-las-p%C3%A1ginas." aria-hidden="true"><span class="octicon octicon-link"></span></a>Crear el pipeline para todos las páginas.<a class="anchor-link" href="#Crear-el-pipeline-para-todos-las-p%C3%A1ginas."> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Con las herramientas creadas, se procede a crear un pipeline para extrar todos todas las tablas de todas las paginas.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Crear-funciones-auxiliares">
+<a class="anchor" href="#Crear-funciones-auxiliares" aria-hidden="true"><span class="octicon octicon-link"></span></a>Crear funciones auxiliares<a class="anchor-link" href="#Crear-funciones-auxiliares"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">fix_nan_column_names</span><span class="p">(</span><span class="n">df_column_names</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Create a clean column names, where nan are replace by unnamed:X value, where</span>
+<span class="sd">    X is an index for each nan value found.</span>
+<span class="sd">    """</span>
+    <span class="c1"># List hte actual column names</span>
+    <span class="n">df_names_to_fix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">df_column_names</span><span class="p">)</span>
+
+    <span class="c1"># Create a new list with fixed column names</span>
+    <span class="n">df_names_fixed</span> <span class="o">=</span> <span class="n">df_names_to_fix</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">'unnamed:'</span> <span class="o">+</span> <span class="p">(</span><span class="n">df_names_to_fix</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df_names_to_fix</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span><span class="o">.</span><span class="n">cumcount</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">df_names_fixed</span>
+
+<span class="k">def</span> <span class="nf">clean_dataframe</span><span class="p">(</span><span class="n">df_input</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Function para limpiar el dataframe que proviene de read_pdf .</span>
+<span class="sd">    </span>
+<span class="sd">    Se procesa los nombres de las columnas segun las variaciones de tamaño y nombres que pueda tener</span>
+<span class="sd">    el dataframe input</span>
+<span class="sd">    </span>
+<span class="sd">    PARAMS:</span>
+<span class="sd">    -------</span>
+<span class="sd">    df_input: Dataframe que proviene del parser read_pdf</span>
+<span class="sd">    </span>
+<span class="sd">    RETURNS:</span>
+<span class="sd">    -------</span>
+<span class="sd">    df :    Dataframe que fue procesador y limpiado.</span>
+<span class="sd">    </span>
+<span class="sd">    """</span>
+    
+    <span class="c1"># Create a copy to work on of the dataframe</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_input</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="c1"># Remove datetime row</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># drop last n rows</span>
+
+    <span class="c1"># Delete the first 5 rows</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">5</span><span class="p">:]</span>
+
+    <span class="c1"># Set the column name to the first element of this new rows</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Start the rows from the next one element </span>
+    <span class="c1"># since we choose 0 as the new column names</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    
+    <span class="c1"># If recinto mesa is in column names, change his name.</span>
+    <span class="k">if</span> <span class="s2">"Recinto Mesa"</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"Recinto Mesa"</span><span class="p">:</span> <span class="s2">"Recinto"</span> <span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="c1"># REGEX part</span>
+    <span class="c1"># Create New Columns spliting the nested one "Doc. de Identidad Municipio" using regex</span>
+    <span class="n">df</span><span class="p">[[</span><span class="s2">"PREFIX - Doc. de Identidad"</span><span class="p">,</span> <span class="s2">"Doc. de Identidad"</span><span class="p">,</span> <span class="s2">"unnamed:0"</span><span class="p">,</span> <span class="s2">"Municipio"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Doc. de Identidad Municipio"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\b(\d+)\b([^\w-])"</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="c1"># List The actual column names</span>
+    <span class="n">new_colum_names</span> <span class="o">=</span> <span class="n">fix_nan_column_names</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+    <span class="c1"># First kind of Variation for column names</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new_colum_names</span><span class="p">)</span> <span class="o">==</span> <span class="mi">11</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new_colum_names</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span><span class="p">):</span>
+
+        <span class="c1"># Set the new column names to the test dataframe</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">columns</span>  <span class="o">=</span> <span class="n">new_colum_names</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Set the value from this "Mesa_Aux" to the "Mesa" column</span>
+            <span class="n">df</span><span class="p">[</span><span class="s2">"Mesa"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"unnamed:2"</span><span class="p">]</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Doc. de Identidad Municipio"</span><span class="p">,</span> <span class="s2">"unnamed:2"</span><span class="p">,</span> <span class="s2">"unnamed:0"</span><span class="p">,</span> <span class="s2">"unnamed:1"</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            
+            <span class="c1"># Set the value from this "Mesa_Aux" to the "Mesa" column</span>
+            <span class="n">df</span><span class="p">[</span><span class="s2">"Mesa"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"unnamed:1"</span><span class="p">]</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Doc. de Identidad Municipio"</span><span class="p">,</span> <span class="s2">"unnamed:0"</span><span class="p">,</span> <span class="s2">"unnamed:1"</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">df</span>
+        
+    <span class="c1"># Second Kind of variation for column names</span>
+    <span class="k">if</span> <span class="nb">len</span> <span class="p">(</span> <span class="n">new_colum_names</span><span class="p">)</span> <span class="o">==</span> <span class="mi">12</span><span class="p">:</span>
+
+        <span class="c1"># Set the new column names to the test dataframe</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">columns</span>  <span class="o">=</span> <span class="n">new_colum_names</span>
+                
+        <span class="c1"># Drop Unused column names</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Doc. de Identidad Municipio"</span><span class="p">,</span>  <span class="s2">"unnamed:3"</span><span class="p">,</span> <span class="s2">"unnamed:2"</span><span class="p">,</span> <span class="s2">"unnamed:0"</span><span class="p">,</span> <span class="s2">"unnamed:1"</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">df</span>  
+    
+    <span class="c1"># Third Kind of Variation for column names</span>
+    <span class="k">if</span> <span class="nb">len</span> <span class="p">(</span> <span class="n">new_colum_names</span><span class="p">)</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">columns</span>  <span class="o">=</span> <span class="n">new_colum_names</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="s2">"Mesa"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"unnamed:1"</span><span class="p">]</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Doc. de Identidad Municipio"</span><span class="p">,</span> <span class="s2">"unnamed:1"</span><span class="p">,</span> <span class="s2">"unnamed:0"</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Doc. de Identidad Municipio"</span><span class="p">,</span> <span class="s2">"unnamed:0"</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">df</span>   
+
+    
+    <span class="c1"># If no match for new_colum_names</span>
+    <span class="c1"># print len for debug later</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span> <span class="p">(</span> <span class="n">new_colum_names</span><span class="p">))</span>
+    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_clean</span> <span class="o">=</span> <span class="n">clean_dataframe</span><span class="p">(</span><span class="n">dfs</span><span class="p">[</span><span class="mi">3041</span><span class="p">])</span>
+<span class="n">df_clean</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>5</th>
+      <th>N°</th>
+      <th>Apellidos y Nombres</th>
+      <th>Recinto</th>
+      <th>PREFIX - Doc. de Identidad</th>
+      <th>Doc. de Identidad</th>
+      <th>Municipio</th>
+      <th>Mesa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>19</th>
+      <td>54.752</td>
+      <td>ZARZURI TENORIO  DIEGO HERLAND</td>
+      <td>Colegio Mariscal Santa Cruz</td>
+      <td>I</td>
+      <td>9173050</td>
+      <td>Achacachi</td>
+      <td>21.0</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>54.753</td>
+      <td>ZAVALA ESPINOZA  CLAUDIA ANTONIETA</td>
+      <td>Escuela Rosemari de Barrientos</td>
+      <td>I</td>
+      <td>4790366</td>
+      <td>Nuestra Señora de La Paz</td>
+      <td>46.0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>54.754</td>
+      <td>ZAVALA HUMEREZ  FEDERICO ERNESTO</td>
+      <td>Esc. San Martin</td>
+      <td>I</td>
+      <td>4311981</td>
+      <td>Nuestra Señora de La Paz</td>
+      <td>34.0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>54.755</td>
+      <td>ZAVALA JIMENEZ  MARIO ALBERTO</td>
+      <td>Colegio Walter Alpire 2do Patio</td>
+      <td>I</td>
+      <td>8312089</td>
+      <td>El Alto</td>
+      <td>14.0</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>54.756</td>
+      <td>ZAVALA JIMENEZ  PAOLA ANDREA</td>
+      <td>Colegio Walter Alpire 1er Patio</td>
+      <td>I</td>
+      <td>10920426</td>
+      <td>El Alto</td>
+      <td>28.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Crear-funcion-para-el-pipeline">
+<a class="anchor" href="#Crear-funcion-para-el-pipeline" aria-hidden="true"><span class="octicon octicon-link"></span></a>Crear funcion para el pipeline<a class="anchor-link" href="#Crear-funcion-para-el-pipeline"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">create_clean_dfs</span><span class="p">(</span><span class="n">dfs</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">        Funcion para procesar y limpiear una lista de dataframes.</span>
+<span class="sd">        PARAMS:</span>
+<span class="sd">        ------</span>
+<span class="sd">        dfs: List of Dataframes</span>
+<span class="sd">        </span>
+<span class="sd">        RETURNS:</span>
+<span class="sd">        -------</span>
+<span class="sd">        status : dict , donde cada uno de los KEYS, corresponde los nombres "FAIL" u "GOOD"</span>
+<span class="sd">                        y los VALUES una lista de dataframes que fueron procesados</span>
+<span class="sd">                        correctamente y los que fallaron.</span>
+<span class="sd">    """</span>
+
+    <span class="n">status</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"TO_FIX_DATAFRAME"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"DFS_CLEAN"</span><span class="p">:[]</span>
+    <span class="p">}</span>
+    
+    <span class="c1"># Iterate over the list of dataframes</span>
+    <span class="k">for</span> <span class="n">df_raw</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">dfs</span><span class="p">):</span>
+        
+        <span class="c1"># Use the function for clean the dataframe</span>
+        <span class="n">df_clean</span> <span class="o">=</span> <span class="n">clean_dataframe</span><span class="p">(</span><span class="n">df_raw</span><span class="p">)</span>
+        
+        <span class="c1"># if dataframe is NOne</span>
+        <span class="k">if</span> <span class="n">df_clean</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Appen this to the list of fails</span>
+            <span class="n">status</span><span class="p">[</span><span class="s2">"TO_FIX_DATAFRAME"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_clean</span><span class="p">)</span>
+            
+            <span class="c1"># Break the loop for debug what just happened</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Procede to append the clean dataframe to the </span>
+            <span class="c1">#  DFS_CLEAN dataframe list</span>
+            
+            <span class="n">status</span><span class="p">[</span><span class="s2">"DFS_CLEAN"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_clean</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"""</span>
+<span class="s2">        FAIL: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">status</span><span class="p">[</span><span class="s2">"TO_FIX_DATAFRAME"</span><span class="p">])</span><span class="si">}</span><span class="s2">,</span>
+<span class="s2">        GOOD: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">status</span><span class="p">[</span><span class="s2">"DFS_CLEAN"</span><span class="p">])</span><span class="si">}</span><span class="s2"></span>
+<span class="s2">    """</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">status</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">status</span> <span class="o">=</span> <span class="n">create_clean_dfs</span><span class="p">(</span><span class="n">dfs_dev</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 3072/3072 [00:30&lt;00:00, 99.70it/s] </pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+        FAIL: 0,
+        GOOD: 3072
+    
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Concatenate-Dataframe">
+<a class="anchor" href="#Concatenate-Dataframe" aria-hidden="true"><span class="octicon octicon-link"></span></a>Concatenate Dataframe<a class="anchor-link" href="#Concatenate-Dataframe"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ya que se tiene una lista de dataframes uniformes, se los pasara a concatenar en un solo dataframe.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dfs_clean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">status</span><span class="p">[</span><span class="s2">"DFS_CLEAN"</span><span class="p">])</span>
+
+<span class="c1"># Check Shape</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dfs_clean</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># Check Head</span>
+<span class="n">dfs_clean</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(55284, 7)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>N°</th>
+      <th>Apellidos y Nombres</th>
+      <th>Recinto</th>
+      <th>Mesa</th>
+      <th>PREFIX - Doc. de Identidad</th>
+      <th>Doc. de Identidad</th>
+      <th>Municipio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>1</td>
+      <td>ABALO LUQUE  JUDITH NANCY</td>
+      <td>Col. Rotary Chuquiago Marca</td>
+      <td>1</td>
+      <td>I</td>
+      <td>9102281</td>
+      <td>El Alto</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2</td>
+      <td>ABALOS CHOQUE  MANCY</td>
+      <td>Unidad Educativa Juan Capriles</td>
+      <td>1</td>
+      <td>I</td>
+      <td>4960747</td>
+      <td>El Alto</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>3</td>
+      <td>ABALOS QUISPE  MARUJA MERCEDES</td>
+      <td>Col. Tunari</td>
+      <td>1</td>
+      <td>I</td>
+      <td>4943746</td>
+      <td>El Alto</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>4</td>
+      <td>ABARIOJO YUCO  MARCO ANTONIO</td>
+      <td>Col. Cristo Rey</td>
+      <td>1</td>
+      <td>I</td>
+      <td>1939274</td>
+      <td>Nuestra Señora de La Paz</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>5</td>
+      <td>ABASTO ARANIBAR  MAURICIO WILSON</td>
+      <td>Colegio Dora Schmidt</td>
+      <td>1</td>
+      <td>I</td>
+      <td>9196248</td>
+      <td>Nuestra Señora de La Paz</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dfs_clean</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>N°</th>
+      <th>Apellidos y Nombres</th>
+      <th>Recinto</th>
+      <th>Mesa</th>
+      <th>PREFIX - Doc. de Identidad</th>
+      <th>Doc. de Identidad</th>
+      <th>Municipio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7</th>
+      <td>55.280</td>
+      <td>ZURITA VALLEJOS  GROBER</td>
+      <td>U. E. 16 de Julio de Mapiri</td>
+      <td>15</td>
+      <td>I</td>
+      <td>8824037</td>
+      <td>Mapiri</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>55.281</td>
+      <td>ZURITA VILLCA  JOB MARCELO</td>
+      <td>Escuela Puerto Perez</td>
+      <td>6</td>
+      <td>I</td>
+      <td>9239461</td>
+      <td>Puerto Pérez</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>55.282</td>
+      <td>ZURITA ZABALETA  JEANNETH MARY</td>
+      <td>Colegio Don Bosco</td>
+      <td>44</td>
+      <td>I</td>
+      <td>4289623</td>
+      <td>El Alto</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>55.283</td>
+      <td>ZURITA ZELADA  ADALID</td>
+      <td>Liceo Bolivia</td>
+      <td>7</td>
+      <td>I</td>
+      <td>3768774</td>
+      <td>Nuestra Señora de La Paz</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>55.284</td>
+      <td>ZUZAÑO FLORES  MARCELO</td>
+      <td>Esc. Mscal. Antonio Jose De Sucre</td>
+      <td>4</td>
+      <td>I</td>
+      <td>10064472</td>
+      <td>Nuestra Señora de La Paz</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Save-to-CSV">
+<a class="anchor" href="#Save-to-CSV" aria-hidden="true"><span class="octicon octicon-link"></span></a>Save to CSV<a class="anchor-link" href="#Save-to-CSV"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dfs_clean</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"JURADOS_CLEAN.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="stanlee321/stan-blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/stan-blog/jupyter/2020/02/20/extract-jurados.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/stan-blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/stan-blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/stan-blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/stan-blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/stan-blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
